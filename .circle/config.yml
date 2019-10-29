@@ -12,14 +12,14 @@ version: 2.1
             keys:
               # Find a cache corresponding to this specific package-lock.json checksum
               # when this file is changed, this key will fail
-              - node_modules-{{ checksum "yarn.lock" }}
+              - node_modules-{{ checksum "package.json" }}
               # Find the most recently generated cache used from any branch
               - node_modules-
           - run:
             name: Install Deps
             command: yarn install
           - save_cache:
-            key: node_modules-{{ checksum "yarn.lock" }}
+            key: node_modules-{{ checksum "package.json" }}
             paths:
               - node_modules
           - run: 
