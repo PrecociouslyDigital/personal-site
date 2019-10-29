@@ -10,16 +10,20 @@
     "serve": "serve dist -p 3000 -s"
   },
   "dependencies": {
+    "@mdx-js/loader": "^1.0.0-rc.4",
+    "@mdx-js/react": "^1.5.1",
     "@reach/router": "^1.2.1",
     "axios": "^0.19.0",
     "find": "^0.3.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-static": "^7.2.0",
+    "react-static-plugin-mdx": "^7.2.2",
     "react-static-plugin-reach-router": "^7.2.0",
     "react-static-plugin-sitemap": "^7.2.0",
     "react-static-plugin-source-filesystem": "^7.2.0",
-    "react-static-plugin-typescript": "^7.2.0"
+    "react-static-plugin-typescript": "^7.2.0",
+    "semantic-ui-react": "^0.88.1"
   },
   "devDependencies": {
     "@types/node": "^12.7.2",
