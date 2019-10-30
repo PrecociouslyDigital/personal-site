@@ -1,81 +1,84 @@
 version: 2.1
-  jobs:
-    build:
-      environment:
-        IMAGE_NAME: registry.hyphen-emdash.com/skyedelaciel
-      docker:
-        - image: circleci/buildpack-deps:stretch
-      steps:
-        - checkout
-        - setup_remote_docker
-        - restore_cache:
-          keys:
-            # Find a cache corresponding to this specific package-lock.json checksum
-            # when this file is changed, this key will fail
-            - node_modules-{{ checksum "package.json" }}
-            # Find the most recently generated cache used from any branch
-            - node_modules-
-        - run:
-          name: Install Deps
-          command: yarn install
-        - save_cache:
-          key: node_modules-{{ checksum "package.json" }}
-          paths:
-            - node_modules
-        - run: 
-          name: Login to Own Docker
-          command: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-        - run:
-          name: Build Docker Image
-          command: docker build -t $IMAGE_NAME:$CIRCLE_SHA1 -t $IMAGE_NAME:$CIRCLE_BRANCH
-        - run:
-          name: Push Docker Image
-          command: docker push $IMAGE_NAME:$CIRCLE_SHA1
-        - run:
-          name: Push Docker Image Branch
-          command: docker push $IMAGE_NAME:$CIRCLE_BRANCH
-    staging:
+jobs:
+  build:
+    environment:
+      IMAGE_NAME: registry.hyphen-emdash.com/skyedelaciel
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - checkout
+      - restore_cache:
+        keys:
+          # Find a cache corresponding to this specific package-lock.json checksum
+          # when this file is changed, this key will fail
+          - node_modules-{{ checksum "package.json" }}
+          # Find the most recently generated cache used from any branch
+          - node_modules-
+      - run:
+        name: Install Deps
+        command: yarn install
+      - save_cache:
+        key: node_modules-{{ checksum "package.json" }}
+        paths:
+          - node_modules
+      - run:
+        name: Build Site
+        command: yarn run build
       - setup_remote_docker
       - run: 
         name: Login to Own Docker
         command: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
       - run:
-        name: Pull Docker Image
-        command: docker pull $IMAGE_NAME:$CIRCLE_SHA1
+        name: Build Docker Image
+        command: docker build -t $IMAGE_NAME:$CIRCLE_SHA1 -t $IMAGE_NAME:$CIRCLE_BRANCH
       - run:
-        name: Tag Docker Image
-        command: docker tag $(docker images $IMAGE_NAME:$CIRCLE_SHA1) $IMAGE_NAME:staging
-      - run:
-        name: Push Docker Image Branch
-        command: docker push $IMAGE_NAME:staging
-    master:
-      - setup_remote_docker
-      - run: 
-        name: Login to Own Docker
-        command: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-      - run:
-        name: Pull Docker Image
-        command: docker pull $IMAGE_NAME:$CIRCLE_SHA1
-      - run:
-        name: Tag Docker Image
-        command: docker tag $(docker images $IMAGE_NAME:$CIRCLE_SHA1) $IMAGE_NAME:master
+        name: Push Docker Image
+        command: docker push $IMAGE_NAME:$CIRCLE_SHA1
       - run:
         name: Push Docker Image Branch
-        command: docker push $IMAGE_NAME:master
-  workflows:
-    version: 2
-    build:
-      jobs:
-        - build
-        - staging:
-          requires: build
-          filters:
-            branches:
-              only: staging
-        - master:
-          type: approval
-          requires: build
-          filters:
-            branches:
-              only: master
-        
+        command: docker push $IMAGE_NAME:$CIRCLE_BRANCH
+  staging:
+    - setup_remote_docker
+    - run: 
+      name: Login to Own Docker
+      command: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+    - run:
+      name: Pull Docker Image
+      command: docker pull $IMAGE_NAME:$CIRCLE_SHA1
+    - run:
+      name: Tag Docker Image
+      command: docker tag $(docker images $IMAGE_NAME:$CIRCLE_SHA1) $IMAGE_NAME:staging
+    - run:
+      name: Push Docker Image Branch
+      command: docker push $IMAGE_NAME:staging
+  master:
+    - setup_remote_docker
+    - run: 
+      name: Login to Own Docker
+      command: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+    - run:
+      name: Pull Docker Image
+      command: docker pull $IMAGE_NAME:$CIRCLE_SHA1
+    - run:
+      name: Tag Docker Image
+      command: docker tag $(docker images $IMAGE_NAME:$CIRCLE_SHA1) $IMAGE_NAME:master
+    - run:
+      name: Push Docker Image Branch
+      command: docker push $IMAGE_NAME:master
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
+      - staging:
+        requires: build
+        filters:
+          branches:
+            only: staging
+      - master:
+        type: approval
+        requires: build
+        filters:
+          branches:
+            only: master
+      
