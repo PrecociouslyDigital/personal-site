@@ -4,7 +4,7 @@ jobs:
     environment:
       IMAGE_NAME: registry.hyphen-emdash.com/skyedelaciel
     docker:
-      - image: circleci/buildpack-deps:stretch
+      - image: circleci/node
     steps:
       - checkout
       - restore_cache:
@@ -38,33 +38,43 @@ jobs:
         name: Push Docker Image Branch
         command: docker push $IMAGE_NAME:$CIRCLE_BRANCH
   staging:
-    - setup_remote_docker
-    - run: 
-      name: Login to Own Docker
-      command: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-    - run:
-      name: Pull Docker Image
-      command: docker pull $IMAGE_NAME:$CIRCLE_SHA1
-    - run:
-      name: Tag Docker Image
-      command: docker tag $(docker images $IMAGE_NAME:$CIRCLE_SHA1) $IMAGE_NAME:staging
-    - run:
-      name: Push Docker Image Branch
-      command: docker push $IMAGE_NAME:staging
+    environment:
+      IMAGE_NAME: registry.hyphen-emdash.com/skyedelaciel
+    docker:
+      - image: circleci/alpine
+    steps:
+      - setup_remote_docker
+      - run: 
+        name: Login to Own Docker
+        command: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+      - run:
+        name: Pull Docker Image
+        command: docker pull $IMAGE_NAME:$CIRCLE_SHA1
+      - run:
+        name: Tag Docker Image
+        command: docker tag $(docker images $IMAGE_NAME:$CIRCLE_SHA1) $IMAGE_NAME:staging
+      - run:
+        name: Push Docker Image Branch
+        command: docker push $IMAGE_NAME:staging
   master:
-    - setup_remote_docker
-    - run: 
-      name: Login to Own Docker
-      command: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-    - run:
-      name: Pull Docker Image
-      command: docker pull $IMAGE_NAME:$CIRCLE_SHA1
-    - run:
-      name: Tag Docker Image
-      command: docker tag $(docker images $IMAGE_NAME:$CIRCLE_SHA1) $IMAGE_NAME:master
-    - run:
-      name: Push Docker Image Branch
-      command: docker push $IMAGE_NAME:master
+    environment:
+      IMAGE_NAME: registry.hyphen-emdash.com/skyedelaciel
+    docker:
+      - image: circleci/alpine
+    steps:
+      - setup_remote_docker
+      - run: 
+        name: Login to Own Docker
+        command: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+      - run:
+        name: Pull Docker Image
+        command: docker pull $IMAGE_NAME:$CIRCLE_SHA1
+      - run:
+        name: Tag Docker Image
+        command: docker tag $(docker images $IMAGE_NAME:$CIRCLE_SHA1) $IMAGE_NAME:master
+      - run:
+        name: Push Docker Image Branch
+        command: docker push $IMAGE_NAME:master
 workflows:
   version: 2
   build:
