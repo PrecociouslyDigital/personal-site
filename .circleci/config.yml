@@ -22,16 +22,25 @@ jobs:
           key: node_modules-{{ checksum "package.json" }}
           paths:
             - node_modules
+      - restore_cache:
+          keys:
+            - build-{{ .Branch }}
+            - build-
       - run:
           name: Build Site
           command: yarn run build
+      - save_cache:
+          key: build-{{ .Branch }}
+          paths:
+            - artifacts
+            - dist
       - setup_remote_docker
       - run: 
           name: Login to Own Docker
           command: echo "$DOCKER_PASS" | docker login registry.hyphen-emdash.com --username $DOCKER_USER --password-stdin
       - run:
           name: Build Docker Image
-          command: docker build -t $IMAGE_NAME:$CIRCLE_SHA1 -t $IMAGE_NAME:$CIRCLE_BRANCH
+          command: docker build ./ -t $IMAGE_NAME:$CIRCLE_SHA1 -t $IMAGE_NAME:$CIRCLE_BRANCH
       - run:
           name: Push Docker Image
           command: docker push $IMAGE_NAME:$CIRCLE_SHA1
