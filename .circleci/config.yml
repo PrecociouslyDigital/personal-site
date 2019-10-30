@@ -51,7 +51,7 @@ jobs:
     environment:
       IMAGE_NAME: registry.hyphen-emdash.com/skyedelaciel
     docker:
-      - image: circleci/alpine
+      - image: circleci/buildpack-deps
     steps:
       - setup_remote_docker
       - run: 
@@ -70,7 +70,7 @@ jobs:
     environment:
       IMAGE_NAME: registry.hyphen-emdash.com/skyedelaciel
     docker:
-      - image: circleci/alpine
+      - image: circleci/buildpack-deps
     steps:
       - setup_remote_docker
       - run: 
