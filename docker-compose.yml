@@ -20,9 +20,9 @@ services:
     networks:
       - nginx
     environment:
-      - VIRTUAL_HOST=skyedelaciel.hyphen-emdash.com
+      - VIRTUAL_HOST=staging.skyedelaciel.hyphen-emdash.com
       - VIRTUAL_PORT=80
-      - LETSENCRYPT_HOST=skyedelaciel.hyphen-emdash.com
+      - LETSENCRYPT_HOST=staging.skyedelaciel.hyphen-emdash.com
       - LETSENCRYPT_EMAIL=fellfromatree@gmail.com
 networks:
   nginx:
