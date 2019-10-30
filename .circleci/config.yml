@@ -28,7 +28,7 @@ jobs:
       - setup_remote_docker
       - run: 
           name: Login to Own Docker
-          command: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+          command: echo "$DOCKER_PASS" | docker login registry.hyphen-emdash.com --username $DOCKER_USER --password-stdin
       - run:
           name: Build Docker Image
           command: docker build -t $IMAGE_NAME:$CIRCLE_SHA1 -t $IMAGE_NAME:$CIRCLE_BRANCH
@@ -47,7 +47,7 @@ jobs:
       - setup_remote_docker
       - run: 
           name: Login to Own Docker
-          command: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+          command: echo "$DOCKER_PASS" | docker login registry.hyphen-emdash.com --username $DOCKER_USER --password-stdin
       - run:
           name: Pull Docker Image
           command: docker pull $IMAGE_NAME:$CIRCLE_SHA1
@@ -66,7 +66,7 @@ jobs:
       - setup_remote_docker
       - run: 
           name: Login to Own Docker
-          command: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+          command: echo "$DOCKER_PASS" | docker login registry.hyphen-emdash.com --username $DOCKER_USER --password-stdin
       - run:
           name: Pull Docker Image
           command: docker pull $IMAGE_NAME:$CIRCLE_SHA1
