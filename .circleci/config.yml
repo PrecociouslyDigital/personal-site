@@ -1,4 +1,5 @@
-version: 2.1
+version: 2
+
 jobs:
   build:
     environment:
@@ -79,15 +80,17 @@ workflows:
   version: 2
   build:
     jobs:
-      - build
+      - build:
       - staging:
-        requires: build
+        requires:
+          - build
         filters:
           branches:
             only: staging
       - master:
         type: approval
-        requires: build
+        requires:
+          - build
         filters:
           branches:
             only: master
