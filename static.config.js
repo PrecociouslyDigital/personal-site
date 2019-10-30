@@ -12,12 +12,16 @@ export default {
         includePaths: [], // Additional include paths on top of the default jsLoader paths
         extensions: ['.md', '.mdx'], // NOTE: these are the default extensions
         mdxOptions: {
-          remarkPlugins: [/* ... */],
+          remarkPlugins: [require('@tufte-markdown/remark-figure-parser'),
+                          require('@tufte-markdown/remark-figure-transformer'),
+                          require('@tufte-markdown/remark-sidenotes'),
+                          require('@tufte-markdown/remark-wrap-in-section'),
+          ],
           rehypePlugins: [/* ... */],
         },
       },
     ],
-    'react-static-plugin-typescript',
+    require.resolve('react-static-plugin-typescript'),
     [
       require.resolve('react-static-plugin-source-filesystem'),
       {
@@ -27,7 +31,6 @@ export default {
     ],
     require.resolve('react-static-plugin-reach-router'),
     require.resolve('react-static-plugin-sitemap'),
-
   ],
   devServer: {
     port: 8080,
