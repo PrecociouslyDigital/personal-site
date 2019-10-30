@@ -12,28 +12,19 @@ jobs:
           keys:
             # Find a cache corresponding to this specific package-lock.json checksum
             # when this file is changed, this key will fail
-            - node_modules-{{ checksum "package.json" }}
+            - node_modules-{{ checksum "yarn.lock" }}
             # Find the most recently generated cache used from any branch
             - node_modules-
       - run:
           name: Install Deps
           command: yarn install
       - save_cache:
-          key: node_modules-{{ checksum "package.json" }}
+          key: node_modules-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-      - restore_cache:
-          keys:
-            - build-{{ .Branch }}
-            - build-
       - run:
           name: Build Site
           command: yarn run build
-      - save_cache:
-          key: build-{{ .Branch }}
-          paths:
-            - artifacts
-            - dist
       - setup_remote_docker
       - run: 
           name: Login to Own Docker
@@ -47,44 +38,16 @@ jobs:
       - run:
           name: Push Docker Image Branch
           command: docker push $IMAGE_NAME:$CIRCLE_BRANCH
-  staging:
-    environment:
-      IMAGE_NAME: registry.hyphen-emdash.com/skyedelaciel
+  promote:
     docker:
-      - image: circleci/buildpack-deps
+      - image: alpine
     steps:
-      - setup_remote_docker
-      - run: 
-          name: Login to Own Docker
-          command: echo "$DOCKER_PASS" | docker login registry.hyphen-emdash.com --username $DOCKER_USER --password-stdin
+      - add_ssh_keys:
+          fingerprints:
+            - "78:13:c1:76:e6:1d:55:d2:ee:18:43:f0:ff:df:12:9c"
       - run:
-          name: Pull Docker Image
-          command: docker pull $IMAGE_NAME:$CIRCLE_SHA1
-      - run:
-          name: Tag Docker Image
-          command: docker tag $(docker images $IMAGE_NAME:$CIRCLE_SHA1) $IMAGE_NAME:staging
-      - run:
-          name: Push Docker Image Branch
-          command: docker push $IMAGE_NAME:staging
-  master:
-    environment:
-      IMAGE_NAME: registry.hyphen-emdash.com/skyedelaciel
-    docker:
-      - image: circleci/buildpack-deps
-    steps:
-      - setup_remote_docker
-      - run: 
-          name: Login to Own Docker
-          command: echo "$DOCKER_PASS" | docker login registry.hyphen-emdash.com --username $DOCKER_USER --password-stdin
-      - run:
-          name: Pull Docker Image
-          command: docker pull $IMAGE_NAME:$CIRCLE_SHA1
-      - run:
-          name: Tag Docker Image
-          command: docker tag $(docker images $IMAGE_NAME:$CIRCLE_SHA1) $IMAGE_NAME:master
-      - run:
-          name: Push Docker Image Branch
-          command: docker push $IMAGE_NAME:master
+          name: deploy via ssh
+          command: ssh skye@hyphen-emdash.com "cd personal-site; sh promote.sh"
 workflows:
   version: 2
   build:
@@ -94,18 +57,12 @@ workflows:
             branches:
               ignore: 
                 - promote
-      - staging:
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - staging
-      - master:
+      - promote:
           requires:
             - build
           filters:
             branches:
               only:
                 - master
+                - staging
       
