@@ -25,7 +25,7 @@ export default {
     [
       require.resolve('react-static-plugin-source-filesystem'),
       {
-        location: path.resolve('./src/pages'),
+        location: path.resolve('src','pages'),
         extensions: ["tsx", "mdx"],
       },
     ],
@@ -34,7 +34,7 @@ export default {
   ],
   devServer: {
     port: 8080,
-    host: '100.115.92.203',
+    host: '127.0.0.1',
   },
-  devBasePath: 'http://100.115.92.203'
+  devBasePath: 'http://127.0.0.1'
 }
