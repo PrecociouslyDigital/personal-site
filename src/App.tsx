@@ -1,8 +1,12 @@
 import React from 'react';
 import { Head, Root, Routes } from 'react-static';
 import { Router } from '@reach/router';
-import 'tufte-css/tufte.min.css';
 import './app.css';
+import 'fomantic-ui-css/semantic.min.css';
+import { MDXProvider } from '@mdx-js/react';
+import { Container, Loader } from 'semantic-ui-react';
+
+const Wrapper : React.FC = ({children}) => <Container text> {children} </Container>
 
 
 function App() {
@@ -16,10 +20,12 @@ function App() {
                 <link href="https://fonts.googleapis.com/css?family=Fira+Code|Fira+Sans|Lora&display=swap" rel="stylesheet" />
             </Head>
             <div className="content">
-                <React.Suspense fallback={<div>uwu nyah</div>}>
-                    <Router>
-                        <Routes path="*" />
-                    </Router>
+                <React.Suspense fallback={<Loader inverted active>Loading</Loader>}>
+                    <MDXProvider components={{ wrapper: Wrapper }}>
+                        <Router>
+                            <Routes path="*" />
+                        </Router>
+                    </MDXProvider>
                 </React.Suspense>
             </div>
         </Root>
