@@ -32,5 +32,6 @@ export default {
     port: 8080,
     host: '100.115.92.203',
   },
+  maxThreads: 16,
   devBasePath: 'http://100.115.92.203:8080'
 }

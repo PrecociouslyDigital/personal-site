@@ -40,14 +40,14 @@ jobs:
           command: docker push $IMAGE_NAME:$CIRCLE_BRANCH
   promote:
     docker:
-      - image: alpine
+      - image: kroniak/ssh-client
     steps:
       - add_ssh_keys:
           fingerprints:
             - "78:13:c1:76:e6:1d:55:d2:ee:18:43:f0:ff:df:12:9c"
       - run:
           name: deploy via ssh
-          command: ssh skye@hyphen-emdash.com "cd personal-site; sh promote.sh"
+          command: ssh -o StrictHostKeyChecking=no skye@hyphen-emdash.com "cd personal-site; sh promote.sh"
 workflows:
   version: 2
   build:
