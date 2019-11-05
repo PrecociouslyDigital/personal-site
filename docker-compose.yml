@@ -13,7 +13,7 @@ services:
       - LETSENCRYPT_HOST=skyedelaciel.hyphen-emdash.com
       - LETSENCRYPT_EMAIL=fellfromatree@gmail.com
   staging:
-    image: registry.hyphen-emdash.com/skyedelaciel:master
+    image: registry.hyphen-emdash.com/skyedelaciel:staging
     expose:
       - '80'
     restart: always
