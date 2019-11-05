@@ -1,18 +1,17 @@
 import React from 'react'
+import { Navbar } from '../components/navbar';
+import { Container } from 'semantic-ui-react';
 
-export default () => (
-  <div style={{ textAlign: 'center' }}>
-    <h1>
-      Welcome to React-Static <br /> + TypeScript
-    </h1>
-    <p>
-      Learn{' '}
-      <a href="https://github.com/sw-yx/react-typescript-cheatsheet">
-        React + TypeScript
-      </a>
-    </p>
-    <p>
-      <a href="https://twitter.com/swyx">Report issues with this template</a>
-    </p>
-  </div>
-)
+
+export default () => (<Container text>
+    <Navbar/>
+    <div style={{ textAlign: 'center' }}>
+        <h1>
+            Welcome to Skyedelaciel
+        </h1>
+        <p>
+            Personal site where I write articles about the things I care about.
+            Opinions are my own.
+        </p>
+    </div>
+</Container>);

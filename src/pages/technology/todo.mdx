@@ -1,0 +1,60 @@
+import { Navbar } from '../../components/navbar';
+
+<Navbar/>
+
+# TODO list
+
+Here's a bunch of things that are either broken or that I think need improving.
+
+# Things which are broken
+- Footer broken
+    - The footer does not display on narrow screens :(
+    - It also just breaks if it doesn't need to be sticky. Which. Urgh.
+
+# Things which are not optimal
+- Index templating.
+    - The index pages for each topic are just giant blobs of JSX right now; I should
+    probably figure out how to pull out the commonalities and have the content 
+    separated from the scaffolding.
+- Semantic UI
+    - Currently a decent number of content pages directly use Semantic UI components
+    which makes me completely dependent on them; I'd prefer to be able to move to another
+    UI framework transparantly, which means I really should add a translation layer
+    between the 
+- Page load sizes
+    - The base entrypoint for the site is around 290kb, not counting external fonts and
+    stylesheets. Semantic UI in particular is a chonky boi, at around 500kb for the base
+    sheet. The CDN helps with cache, but it does mean a chonky first page load, which I
+    should look into fixing. Not sure how to fix it without ditching Semantic UI though,
+    which isn't off the table.
+
+# Things which could be better
+- Sidenotes
+    - [Tufte-style sidenotes](https://edwardtufte.github.io/tufte-css/#sidenotes) are
+    a cool way to do footnotes. I love footnotes[^ it's true], but traditional footnotes 
+    have horrible web ux: they're fiddly to check and then you lose your place in the
+    page when you finish reading and try to go back.
+    - Sidenotes are *really* hard to implement though, because they don't really make 
+    sense from a web perspective. Sidenotes are sort of like... Floating side bits that 
+    make a best effort to link up with a specific text anchor; not something that's easy
+    to implement.
+        - That's not even getting into the fallback modes when margins aren't available.
+    - No one really has written a component to do all that stuff[^2], probably
+    for the reasons described.
+            - The approach I had in mind looks like [John D Jameson's approach](https://johndjameson.com/blog/responsive-sidenotes/) There are technical caveats though.
+- Navbar
+    - The navbar right now is nice, but I kind of wish it could be better. It's kind
+    of unbalanced when vertically stacked on narrow screens. I'd like for
+    the navbar to use the left margin space (going forward, left margin is for site
+    things, right margin is for sidenotes), but I don't have a good ux for when it needs
+    to shift out of the left margin in narrow screens.
+- Link Previews
+    - I'd like to have popups on hover over links to get a preview of what the link goes
+    to, or for excerpts and citations on things I'm citing. The most straightforward but
+    annoying things to implement, there should be an easy component for this but there
+    isn't[^ Everything else is usually too bloated and big and fancy.]. Just gonna have
+    to spend an afternoon on it sometime.
+- The content
+    - I have categories but not actual articles for most things on this site.
+
+[^2]: Okay, technically not true, some guy at Full Stack University[^Spoiler: not an actual university] made a [sidenotes implementation](https://www.fullstackacademy.com/hackathon-presentations/sidenotes) during a hackathon but it's *NOT ON NPM* and *I CAN'T FIND IT ANYWHERE* 
