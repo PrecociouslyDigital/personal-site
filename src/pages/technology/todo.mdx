@@ -21,7 +21,7 @@ Here's a bunch of things that are either broken or that I think need improving.
     which makes me completely dependent on them; I'd prefer to be able to move to another
     UI framework transparantly, which means I really should add a translation layer
     between the 
-- Page loads
+- Page load sizes
     - The base entrypoint for the site is around 290kb, not counting external fonts and
     stylesheets. Semantic UI in particular is a chonky boi, at around 500kb for the base
     sheet. The CDN helps with cache, but it does mean a chonky first page load, which I
@@ -38,11 +38,10 @@ Here's a bunch of things that are either broken or that I think need improving.
     sense from a web perspective. Sidenotes are sort of like... Floating side bits that 
     make a best effort to link up with a specific text anchor; not something that's easy
     to implement.
-            - That's not even getting into the fallback modes when margins aren't available.
-    - No one really has written a component to do all that stuff[^well actually], probably
+        - That's not even getting into the fallback modes when margins aren't available.
+    - No one really has written a component to do all that stuff[^2], probably
     for the reasons described.
-            - [John D Jameson's approach](https://johndjameson.com/blog/responsive-sidenotes/)
-            is pretty much what I had in mind. There are caveats though.
+            - The approach I had in mind looks like [John D Jameson's approach](https://johndjameson.com/blog/responsive-sidenotes/) There are technical caveats though.
 - Navbar
     - The navbar right now is nice, but I kind of wish it could be better. It's kind
     of unbalanced when vertically stacked on narrow screens. I'd like for
@@ -58,4 +57,4 @@ Here's a bunch of things that are either broken or that I think need improving.
 - The content
     - I have categories but not actual articles for most things on this site.
 
-[^well actually]: Okay, technically not true, some guy at Full Stack University[^Spoiler: not an actual university] made a [sidenotes implementation](https://www.fullstackacademy.com/hackathon-presentations/sidenotes) during a hackathon but it's *NOT ON NPM* and *I CAN'T FIND IT ANYWHERE* 
+[^2]: Okay, technically not true, some guy at Full Stack University[^Spoiler: not an actual university] made a [sidenotes implementation](https://www.fullstackacademy.com/hackathon-presentations/sidenotes) during a hackathon but it's *NOT ON NPM* and *I CAN'T FIND IT ANYWHERE* 

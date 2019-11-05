@@ -38,7 +38,7 @@ export default () => (<Container text>
 	            </ul>
             </Grid.Column>
             <Grid.Column>
-	            <h2>Misc</h2>
+	            <h2>Miscallanious</h2>
 	            <p>Things that do not fall within the bounds of the other categories </p>
 	            <ul>
 	            	<li><a href="https://ansuz.sooke.bc.ca/entry/23">What Colour are your bits? (Skala 2004) </a></li>

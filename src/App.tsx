@@ -27,6 +27,7 @@ function App() {
                         </Router>
                     </MDXProvider>
                 </React.Suspense>
+                <div className="push"/>
             </div>
             <footer>
                 <Container>
