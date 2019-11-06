@@ -16,7 +16,6 @@ function App() {
                   name="viewport"
                   content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
                 />
-                <link href="https://fonts.googleapis.com/css?family=Fira+Code|Fira+Sans|Lora&display=swap" rel="stylesheet" />
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.7.8/semantic.min.css" rel="stylesheet" />
             </Head>
             <div className="content">
