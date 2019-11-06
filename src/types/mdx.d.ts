@@ -40,3 +40,6 @@ declare module '@mdx-js/react' {
   }
   export class MDXProvider extends React.Component<MDXProviderProps> {}
 }
+
+declare const BRANCH: string;
+declare const COMMITHASH: string;
