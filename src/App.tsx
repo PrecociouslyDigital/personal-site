@@ -1,7 +1,6 @@
 import React from 'react';
 import { Head, Root, Routes } from 'react-static';
 import { Router } from '@reach/router';
-import './app.css';
 import { MDXProvider } from '@mdx-js/react';
 import { Container, Loader } from 'semantic-ui-react';
 
@@ -18,6 +17,8 @@ function App() {
                 />
                 <link href="https://fonts.googleapis.com/css?family=Fira+Code|Fira+Sans|Lora&display=swap" rel="stylesheet" />
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.7.8/semantic.min.css" rel="stylesheet" />
+                <link href="/app.css" rel="stylesheet" />
+
             </Head>
             <div className="content">
                 <React.Suspense fallback={<Loader inverted active>Loading</Loader>}>
