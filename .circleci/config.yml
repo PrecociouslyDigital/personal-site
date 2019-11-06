@@ -65,4 +65,5 @@ workflows:
               only:
                 - master
                 - staging
+                - cursed
       
