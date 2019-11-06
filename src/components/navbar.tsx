@@ -19,6 +19,11 @@ const Navbar : React.FC = () => (
 				<Icon name="mail" link/>
 			</a>
 		</Menu.Item>
+		<Menu.Item link right>
+			<a href="https://github.com/precociouslydigital/personal-site">
+				<Icon name="github" link/>
+			</a>
+		</Menu.Item>
 	</Menu>
 );
 
