@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { Grid } from 'semantic-ui-react';
-import { Link } from '@reach/router';
 import { Navbar } from '../../components/navbar';
 import { Container } from 'semantic-ui-react';
 import Reccomendations from '../../partials/recommendations.mdx';
+import { Title } from '../../components/title/title';
 
 export default () => (<Container text>
 	<Navbar/>
-	<h1>
+	<Title>
         Personal
-    </h1>
+    </Title>
     <p>
         Things I write about me.
     </p>
@@ -33,15 +33,12 @@ export default () => (<Container text>
 	            <h2>Math</h2>
 	            <p>Things about math that I'm either looking into or found to be neat</p>
 	            <ul>
-	            	<li><Link to="/technology/about"> Design Philosophy of This Site </Link></li>
-	            	<li><Link to="/technology/todo"> Things I Need to Do </Link></li>
 	            </ul>
             </Grid.Column>
             <Grid.Column>
 	            <h2>Miscallanious</h2>
 	            <p>Things that do not fall within the bounds of the other categories </p>
 	            <ul>
-	            	<li><a href="https://ansuz.sooke.bc.ca/entry/23">What Colour are your bits? (Skala 2004) </a></li>
 	            </ul>
             </Grid.Column>
         </Grid.Row>

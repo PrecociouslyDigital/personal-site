@@ -10,7 +10,7 @@ export default () => (<Container text>
             Welcome to Skyedelaciel
         </h1>
         <p>
-            Personal site where I write essays about the things I care about.
+            Personal site where I write essays or link to other people's on topics I care about.
             Opinions are my own.
         </p>
     </div>
