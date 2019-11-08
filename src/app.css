@@ -7,7 +7,7 @@ footer {
   margin-bottom: 0;
   height:80px;
 }
-.content {
+.bodyContent {
   min-height: 100vh;
 
   /* Equal to height of footer */
