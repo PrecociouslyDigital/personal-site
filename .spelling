@@ -1,0 +1,62 @@
+# markdown-spellcheck spelling configuration file
+# Format - lines beginning # are comments
+# global dictionary is at the start, file overrides afterwards
+# one word per line, to define a file override use ' - filename'
+# where filename is relative to this configuration file
+navbar
+esports
+math
+WGA
+Overwatch
+UW
+seattleite
+Tespa
+1
+1960s
+todo
+urgh
+JSX
+entrypoint
+290kb
+stylesheets
+chonky
+boi
+500kb
+CDN
+sidenotes
+tufte-style
+popups
+NPM
+webcomics
+Goonish
+Shive
+Tedd
+Gunnerkrigg
+widdershins
+cubewatermelon
+2019
+Slytherin
+Malfoy
+worldbuilding
+pureblood
+wizarding
+superpowered
+sorta
+CGP
+Babish
+Gigguk
+ASI
+RTGame
+dang
+StealthNinja
+potsu
+ - src/pages/hello.mdx
+lorem
+ips
+Ipsum
+1500s
+lor
+Letraset
+PageMaker
+ - src/pages/technology/todo.mdx
+2

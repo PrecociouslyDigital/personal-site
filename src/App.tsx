@@ -1,6 +1,6 @@
 import React from 'react';
 import { Head, Root, Routes } from 'react-static';
-import { Router } from '@reach/router';
+import { Router, Location } from '@reach/router';
 import './app.css';
 import { MDXProvider } from '@mdx-js/react';
 import { Container, Loader, Grid } from 'semantic-ui-react';
@@ -17,6 +17,11 @@ function App() {
                   name="viewport"
                   content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
                 />
+                <Location>
+                    {({ location }) => <meta property="og:url" content={location.href} />}
+                </Location>
+                <meta property="og:type" content="article" />
+                <meta property="og:site_name" content="Skyedelaciel" />
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.7.8/semantic.min.css" rel="stylesheet" />
             </Head>
             <div className="content">
