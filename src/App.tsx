@@ -3,7 +3,8 @@ import { Head, Root, Routes } from 'react-static';
 import { Router } from '@reach/router';
 import './app.css';
 import { MDXProvider } from '@mdx-js/react';
-import { Container, Loader } from 'semantic-ui-react';
+import { Container, Loader, Grid } from 'semantic-ui-react';
+import { CommitLink } from './components/githubLink';
 
 const Wrapper : React.FC = ({children}) => <Container text> {children} </Container>
 
@@ -31,10 +32,15 @@ function App() {
             
             <footer>
                 <Container>
-                    <p>
-                    This work is licensed under a 
-                    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-                    <span style={{textAlign:'right'}}>This site is serving skyedelaciel@{`${BRANCH}`}</span></p>
+                    <Grid>
+                        <Grid.Column floated='left' width={9}>
+                            This work is licensed under a 
+                            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+                        </Grid.Column>
+                        <Grid.Column floated='right' width={4}>
+                            This site is serving <CommitLink> skyedelaciel@{`${BRANCH}`} </CommitLink>
+                        </Grid.Column>
+                    </Grid>
                 </Container>
             </footer>
         </Root>
