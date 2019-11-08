@@ -3,7 +3,7 @@ import { Menu, Icon, Popup } from 'semantic-ui-react';
 import { Link } from '@reach/router';
 import { CopyItem } from './copyLink';
 
-const Navbar : React.FC = () => (
+const Navbar : React.FC = React.memo(() => (
     <Menu stackable text>
         <Menu.Item header link>
             {' '}
@@ -48,7 +48,7 @@ const Navbar : React.FC = () => (
         <Menu.Item link right>
             <CopyItem
                 copy={(copied) => (copied ? 'Copied!' : 'Discord: Skyedelaciel#0001')}
-                icon={<Icon name="discord" aria-label="Discord: Skyedelaciel#0001" link />}
+                icon={<a><Icon name="discord" aria-label="Discord: Skyedelaciel#0001" link /></a>}
                 text="Skyedelaciel#0001"
             />
         </Menu.Item>
@@ -58,6 +58,6 @@ const Navbar : React.FC = () => (
             </a>
         </Menu.Item>
     </Menu>
-);
+));
 
 export { Navbar };

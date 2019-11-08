@@ -7,6 +7,7 @@ export const Title: React.FC = ({ children }) => (
     <>
         <h1 className="title">{children}</h1>
         <Head>
+        	<title> {children.toString()} - Skyedelaciel </title>
             <meta property="og:title" content={children.toString()} />
         </Head>
     </>

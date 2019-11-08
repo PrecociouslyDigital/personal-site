@@ -5,7 +5,7 @@ import { Navbar } from '../../components/navbar';
 import Reccomendations from '../../partials/recommendations.mdx';
 import { Title } from '../../components/title/title';
 
-export default () => (
+export default React.memo(() => (
     <Container text>
         <Navbar />
         <Title>
@@ -43,4 +43,4 @@ export default () => (
         <h2>Things I also read</h2>
         <Reccomendations />
     </Container>
-);
+));

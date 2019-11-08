@@ -6,7 +6,7 @@ import { Navbar } from '../../components/navbar';
 import { Title } from '../../components/title/title';
 
 
-export default () => (
+export default React.memo(() => (
     <Container text>
         <Navbar />
         <Title>
@@ -47,4 +47,4 @@ export default () => (
             </Grid.Row>
         </Grid>
     </Container>
-);
+));

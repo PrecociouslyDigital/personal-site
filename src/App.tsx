@@ -5,15 +5,7 @@ import './app.css';
 import { MDXProvider } from '@mdx-js/react';
 import { Container, Loader, Grid } from 'semantic-ui-react';
 import { CommitLink } from './components/githubLink';
-
-const Wrapper : React.FC = ({ children }) => (
-    <Container text>
-        {' '}
-        {children}
-        {' '}
-    </Container>
-);
-
+import { MDXComponents } from './components/mdxComponents';
 
 function App() {
     return (
@@ -26,13 +18,16 @@ function App() {
                 <Location>
                     {({ location }) => <meta property="og:url" content={location.href} />}
                 </Location>
+                <title> Skyedelaciel </title>
                 <meta property="og:type" content="article" />
                 <meta property="og:site_name" content="Skyedelaciel" />
+                <meta property="og:description" content="Skyedelaciel" />
+                <meta property="og:description" content="Personal Site for Skyedelaciel" />
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.7.8/semantic.min.css" rel="stylesheet" />
             </Head>
             <div className="bodyContent">
                 <React.Suspense fallback={<Loader inverted active>Loading</Loader>}>
-                    <MDXProvider components={{ wrapper: Wrapper }}>
+                    <MDXProvider components={MDXComponents}>
                         <Router>
                             <Routes path="*" />
                         </Router>
