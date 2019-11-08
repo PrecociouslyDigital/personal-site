@@ -34,8 +34,7 @@ function App() {
                 <Container>
                     <Grid>
                         <Grid.Column floated='left' width={9}>
-                            This work is licensed under a 
-                            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+                            This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
                         </Grid.Column>
                         <Grid.Column floated='right' width={4}>
                             This site is serving <CommitLink> skyedelaciel@{`${BRANCH}`} </CommitLink>
