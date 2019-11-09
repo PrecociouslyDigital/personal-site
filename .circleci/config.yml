@@ -66,4 +66,5 @@ workflows:
                 - master
                 - staging
                 - promote
-      
+                - cursed      
+
