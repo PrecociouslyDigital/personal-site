@@ -24,6 +24,18 @@ services:
       - VIRTUAL_PORT=80
       - LETSENCRYPT_HOST=staging.skyedelaciel.hyphen-emdash.com
       - LETSENCRYPT_EMAIL=fellfromatree@gmail.com
+  cursed:
+    image: registry.hyphen-emdash.com/skyedelaciel:cursed
+    expose:
+      - '80'
+    restart: always
+    networks:
+      - nginx
+    environment:
+      - VIRTUAL_HOST=cursed.skyedelaciel.hyphen-emdash.com
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=cursed.skyedelaciel.hyphen-emdash.com
+      - LETSENCRYPT_EMAIL=fellfromatree@gmail.com
 networks:
   nginx:
     name: nginx

@@ -1,0 +1,69 @@
+version: 2.1
+
+jobs:
+  build:
+    environment:
+      IMAGE_NAME: registry.hyphen-emdash.com/skyedelaciel
+    docker:
+      - image: circleci/node
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            # Find a cache corresponding to this specific package-lock.json checksum
+            # when this file is changed, this key will fail
+            - node_modules-{{ checksum "yarn.lock" }}
+            # Find the most recently generated cache used from any branch
+            - node_modules-
+      - run:
+          name: Install Deps
+          command: yarn install
+      - save_cache:
+          key: node_modules-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run:
+          name: Build Site
+          command: yarn run build
+      - setup_remote_docker
+      - run: 
+          name: Login to Own Docker
+          command: echo "$DOCKER_PASS" | docker login registry.hyphen-emdash.com --username $DOCKER_USER --password-stdin
+      - run:
+          name: Build Docker Image
+          command: docker build ./ -t $IMAGE_NAME:$CIRCLE_SHA1 -t $IMAGE_NAME:$CIRCLE_BRANCH
+      - run:
+          name: Push Docker Image
+          command: docker push $IMAGE_NAME:$CIRCLE_SHA1
+      - run:
+          name: Push Docker Image Branch
+          command: docker push $IMAGE_NAME:$CIRCLE_BRANCH
+  promote:
+    docker:
+      - image: kroniak/ssh-client
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "78:13:c1:76:e6:1d:55:d2:ee:18:43:f0:ff:df:12:9c"
+      - run:
+          name: deploy via ssh
+          command: ssh -o StrictHostKeyChecking=no skye@hyphen-emdash.com "cd personal-site; sh promote.sh"
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore: 
+                - promote
+      - promote:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+                - staging
+                - promote
+      
