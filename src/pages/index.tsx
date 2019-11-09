@@ -3,7 +3,7 @@ import { Container } from 'semantic-ui-react';
 import { Navbar } from '../components/navbar';
 
 
-export default () => (
+export default React.memo(() => (
     <Container text>
         <Navbar />
         <div style={{ textAlign: 'center' }}>
@@ -16,4 +16,4 @@ export default () => (
             </p>
         </div>
     </Container>
-);
+));

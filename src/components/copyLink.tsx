@@ -29,7 +29,7 @@ export const CopyItem : React.FC<{
             size="small"
             inverted
             position="top center"
-            popperDependencies={copied}
+            popperDependencies={copied as any}
         >
             <Popup.Content>
                 {copy(copied)}

@@ -12,7 +12,7 @@ export default {
         extensions: ['.md', '.mdx'], // NOTE: these are the default extensions
         mdxOptions: {
           remarkPlugins: [require('remark-toc')],
-          rehypePlugins: [require('rehype-slug')],
+          rehypePlugins: [require('rehype-slug'), require('rehype-prism')],
         },
       },
     ],
