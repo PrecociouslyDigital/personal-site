@@ -6,23 +6,18 @@ import { CopyItem } from './copyLink';
 const Navbar : React.FC = React.memo(() => (
     <Menu stackable text>
         <Menu.Item header link>
-            {' '}
             <Link to="/"> Skyedelaciel </Link>
         </Menu.Item>
         <Menu.Item link>
-            {' '}
             <Link to="/personal"> Personal </Link>
         </Menu.Item>
         <Menu.Item link>
-            {' '}
             <Link to="/esports"> Esports </Link>
         </Menu.Item>
         <Menu.Item link>
-            {' '}
             <Link to="/technology"> Technology </Link>
         </Menu.Item>
         <Menu.Item link>
-            {' '}
             <Link to="/about"> About </Link>
         </Menu.Item>
         <Menu.Item link right>
