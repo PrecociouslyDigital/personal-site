@@ -23,9 +23,9 @@ function App() {
                 <meta property="og:site_name" content="Skyedelaciel" />
                 <meta property="og:description" content="Skyedelaciel" />
                 <meta property="og:description" content="Personal Site for Skyedelaciel" />
-                <link href="/css/semantic.min.css" rel="stylesheet"/>
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.7.8/semantic.min.css" rel="stylesheet" />
 
-                <link rel="stylesheet" href="/css/katex.min.css" integrity="sha384-BdGj8xC2eZkQaxoQ8nSLefg4AV4/AwB3Fj+8SUSo7pnKP6Eoy18liIKTPn9oBYNG"/>
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css" integrity="sha384-BdGj8xC2eZkQaxoQ8nSLefg4AV4/AwB3Fj+8SUSo7pnKP6Eoy18liIKTPn9oBYNG" crossOrigin="anonymous"/>
             </Head>
             <div className="bodyContent">
                 <React.Suspense fallback={<Loader inverted active>Loading</Loader>}>
