@@ -9,7 +9,14 @@ import { Abstract } from '../../components/abstract';
 <Abstract> Here's a bunch of things that are either broken or that I think need improving. </Abstract>
 
 # Things which are broken
-- Nothing right now!
+- MDX Lists
+    - List spacing gets a touch wonky for whatever reason
+    - I can't do a third-level list item
+        - It just ends up being inline for whatever reason.
+- Code Blocks
+    - Code blocks don't display correctly on narrow screens; they just continue to
+    the right and it's not a good look
+    - Syntax highlighting is completely non-functional, needs investigating.
 
 # Things which are not optimal
 - Index templating.
@@ -80,5 +87,4 @@ import { Abstract } from '../../components/abstract';
     - I'd like to switch between dark and light theme files using [prefers-color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) and
     associated media queries. I'm thinking flatly for light and darkly for dark.
 
-[^2]: Okay, technically not true, some guy at Full Stack University made a [sidenotes implementation](https://www.fullstackacademy.com/hackathon-presentations/sidenotes) for 
-react during a hackathon but it's *NOT ON NPM* and *I CAN'T FIND IT ANYWHERE* 
+[^2]: Okay, technically not true, some guy at Full Stack University made a [sidenotes implementation](https://www.fullstackacademy.com/hackathon-presentations/sidenotes) for react during a hackathon but it's *NOT ON NPM* and *I CAN'T FIND IT ANYWHERE* 

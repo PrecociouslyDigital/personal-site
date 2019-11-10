@@ -7,7 +7,7 @@ export const CopyLink : React.FC<{href: string}> = ({ href }) => (
     <CopyItem
         text={href}
         copy={(copied) => (copied ? 'Copied!' : 'Copy to Clipboard')}
-        icon={<Icon name="linkify" size="small" aria-label="Copy to Clipboard" />}
+        icon={<Icon name="linkify" size="tiny" aria-label="Copy to Clipboard" />}
     />
 );
 
