@@ -11,8 +11,8 @@ export default {
         includePaths: [], // Additional include paths on top of the default jsLoader paths
         extensions: ['.md', '.mdx'], // NOTE: these are the default extensions
         mdxOptions: {
-          remarkPlugins: [require('remark-toc')],
-          rehypePlugins: [require('rehype-slug')],
+          remarkPlugins: [require('remark-toc'), require('remark-math')],
+          rehypePlugins: [require('rehype-slug'), require('rehype-prism'), require('rehype-katex')],
         },
       },
     ],

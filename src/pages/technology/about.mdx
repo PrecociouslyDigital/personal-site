@@ -1,0 +1,322 @@
+import { Navbar } from '../../components/navbar';
+import { Abstract } from '../../components/abstract';
+import { Title } from '../../components/title/title';
+import { CopyLink } from '../../components/copyLink';
+import { Link } from '@reach/router';
+
+<Navbar/>
+<Title> About This Site </Title>
+<Abstract>
+	Skyedelaciel is intended to be a personal portfolio site, serving mostly essays or
+	self-contained experimental applications.
+	Its technical goals mostly revolve around being easy to tweak, edit, and release.
+	Skyedelaciel was built with <a href="https://github.com/react-static/react-static">react-static</a>, a static site generator built around React.
+	It also makes heavy use of the <a href="https://mdxjs.com">MDX</a> plugin for react-static so
+	pages can be written in markdown and focus on content instead of scaffolding.
+	Styling is done with Semantic UI, since I am Bad at CSS.
+</Abstract>
+
+*Epistemic Status*: Certain. Dependent on my knowledge of Web Technologies and code
+I've written, both of which don't have a lot of uncertainty.
+
+*Likelyhood of Revisiting*: High, as I'll likely add more features and make changes that
+require updating the documentation of them on this page.
+
+See also: 
+
+- <Link to="/about"> About: </Link> Read more about the site itself and me.
+- [Gwern.net](https://gwern.net/About): Read Gwern's philsophy on site design, which heavily inspired this site.
+- <Link to="/technology/todo"> TODO: </Link> Read more about some bugs that need 
+fixing and some features I'd like to implement.
+
+# Table of Contents
+
+# Goals
+In building this site, I kept five main technical critereon in mind. In rough order of 
+importance, they are:
+
+1. Ease of Creating Content
+
+The site should be laid out in a way that makes it easy for me to create, update and 
+eventually deploy pages. It should be tailored specifically to me, not the hypothetical
+developer in general.
+
+2. Source-file Legible
+
+Even 100 years down the line, when Node is but a footnote in "History of Computer 
+Science" textbooks and npm has been relegated to the dustbin of history, the content on 
+this site should still be reasonably legible.
+
+3. Speedy, Robust and Lightweight
+
+The site should be quick to load and not demanding of device resources. It should degrade
+gracefully where Javascript or other browser features are unavailable. It should still 
+render correctly on older browsers, most mobile devices, and screen readers and other
+non-traditional ways of browsing the web.
+
+4. Pretty
+
+The site should look good (❁´▽\`❁)*✲ﾟ*.
+
+5. Version Controlled
+
+The site should be amenable to version control. The site's changes and history should
+be easily viewable and easy to access.
+
+# Typescript
+
+I use Typescript both because it provides some compile-time error checking to ensure that
+silly typos and trivial bugs are caught, but also because I'm familiar with it, and it's
+more comfortable for me to use it than to not use it.
+
+# React Static
+[React Static](https://github.com/react-static/react-static) is a static site generator built around React and its ecosystem. React Static lets me write pages and components in
+ways pretty much indistinguishable from a regular React Single-Page Application (SPA),
+but provides most of the benefits of a regular static site.
+
+## Why React? 
+Why do we want to use React to build our site? To illustrate, let's look at the code for
+our home page!
+
+```tsx
+import React from 'react';
+import { Container } from 'semantic-ui-react';
+import { Navbar } from '../components/navbar';
+
+
+export default React.memo(() => (
+    <Container text>
+        <Navbar />
+        <div style={{ textAlign: 'center' }}>
+            <h1>
+            Welcome to Skyedelaciel
+            </h1>
+            <p>
+            Personal site where I write essays or link to other people's on topics I care about.
+            Opinions are my own.
+            </p>
+        </div>
+    </Container>
+));
+```
+
+I write the index page exactly the same way I would a view in a React SPA. We write our
+component as a functional React component, taking advantage of JSX to make it easy to
+create the html we need. We can import useful code from both other project files and 
+modules from npm and the wider node ecosystem, but we have full flexibility in how 
+this page is finally rendered. It'd be easy to remove the Navbar, for example, and 
+replace it with something else. 
+
+I can say with confidence that in accordance with
+goal 1, this is the most comfortable way for me to create and update pages on this
+site. That's not to say that this means React is the best framework, or that these
+design patterns are the best ones, but these are the ones that I'm most used to and
+that I work fastest with.
+
+## Why React Static?
+
+React Static takes this React Component and renders it before it hits the browser. It
+spits out a single html entrypoint that looks something like this:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    ...
+</head>
+<body>
+    <div id="root">
+        <div style="outline:none" tabindex="-1" role="group">
+            <div class="bodyContent">
+                ...
+                        <div style="text-align:center">
+                            <h1>Welcome to Skyedelaciel</h1>
+                            <p>Personal site where I write essays or link to other people&#x27;s on topics I care about. Opinions are my own.</p>
+                        </div>
+                    </div>
+                </div>
+		...
+</body>
+</html>
+```
+
+(HTML Scaffolding removed for brevity and clarity)
+
+We can see that in contrast to most React SPAs, all of the content of the site is 
+available in plain html. No Javascript has to run before the user can see the site
+and its content, in accordance with goal 3.
+
+React Static also generates some stuff that looks like this
+
+```html
+<script type="text/javascript">
+        window.__routeInfo = JSON.parse("...");
+</script>
+...
+<script defer="" type="text/javascript" src="/templates/styles.ac1fd06f.js"></script>
+<script defer="" type="text/javascript" src="/templates/vendors~main.302c4a1d.js"></script>
+<script defer="" type="text/javascript" src="/main.889e95d7.js"></script>
+```
+
+This javascript hydrates the React application on the page and begins prefetching 
+pages that the user could navigate to next. This enables any components that do require
+javascript to run, and reduces load times when navigating to other pages.
+
+# MDX
+React-Static is great for writing pages and html directly in a way that's simple and 
+comfortable to me. But it seems very tedious to write all my content in html.
+
+
+```
+<h1>
+	Imagine this.
+</h1>
+</p>
+	Imagine this, but for a 2.5k word essay. That's a lot.
+</p>
+```
+
+Not only does it add a lot of friction to have to write out all the html by hand, 
+it also makes it less legible, in opposition to goal 2. [MDX](https://mdxjs.com) is a
+way to write Markdown that gets transpiled to the same JSX syntax that React uses. With
+MDX, our example becomes
+
+```md
+# Imagine this
+Imagine this, but for a 2.5k word essay. That's a lot.
+```
+
+Much better! Markdown is designed for writing text
+content and then transpiling to html, and it's again, something I'm familiar and 
+comfortable with. It's also much more legible, as even if MDX no longer exists and the
+specification is lost, it's much easier to infer the meaning of the document from the 
+MDX source.
+
+## React in MDX
+
+MDX also has the benefit of allowing us to use React components in our Markdown. For
+example, we have a title component `title.tsx`
+
+```tsx
+import * as React from 'react';
+import { Head } from 'react-static';
+
+import './title.css';
+
+export const Title: React.FC = ({ children }) => (
+    <>
+        <h1 className="title">{children}</h1>
+        <Head>
+        	<title> {children.toString()} - Skyedelaciel </title>
+            <meta property="og:title" content={children.toString()} />
+        </Head>
+    </>
+);
+```
+
+We use this React component to declare and style the titles for our pages. MDX lets us
+use this component in our Markdown to achieve the same effect.
+
+```mdx
+import { Title } from '../components/title/title';
+
+<Title> Imagine this </Title>
+Imagine this, but for a 2.5k word essay. That's a lot.
+```
+
+Not only is this convenient and declarative, but it's also semantic and legible. 
+"Imagine this" is pretty clearly the title, and in the output, it will be
+styled as such, and we can do the same thing on any page that requires a title.
+
+This configuration is basically "[The Best of Both Worlds](https://www.youtube.com/watch?v=uVjRe8QXFHY)"
+We get the nice syntax of Markdown with all the flexibility of React.[^1]
+
+[^1]: Under the hood, MDX uses [remark](https://remark.js.org/) and [rehype](https://github.com/rehypejs/rehype), both part of the [unified.js collective](https://unifiedjs.com/) to transpile markdown to JSX. This lets us also take advantage of the broad ecosystem of plugins around these tools to provide stuff like [syntax highlighting](https://github.com/mapbox/rehype-prism) or [latex blocks](https://github.com/remarkjs/remark-math/tree/master/packages/remark-math).
+
+# Semantic UI
+Semantic UI tries to express design
+concepts using natural language. Instead of describing how an element should look,
+instead we describe what it is. As an example, let's look at the code for our Navbar.
+
+```tsx
+import { Menu } from 'semantic-ui-react';
+import * as React from 'react';
+import { Link } from '@reach/router';
+
+const Navbar : React.FC = React.memo(() => (
+	<Menu stackable text>
+        <Menu.Item header link>
+            <Link to="/"> Skyedelaciel </Link>
+        </Menu.Item>
+        <Menu.Item link>
+            <Link to="/personal"> Personal </Link>
+        </Menu.Item>
+        <Menu.Item link>
+            <Link to="/esports"> Esports </Link>
+        </Menu.Item>
+        <Menu.Item link>
+            <Link to="/technology"> Technology </Link>
+        </Menu.Item>
+        <Menu.Item link>
+            <Link to="/about"> About </Link>
+        </Menu.Item>
+        ...
+    </Menu>
+```
+
+(Again, parts removed for brevity and clarity)
+
+Under Semantic UI, the we describe element-nouns with modifier adjectives, the way
+we do in english. What is the element? a `Menu`. What kind of menu is it? one that is
+`stackable` and holds `text`. What is in the menu? It's `Menu.Item`, which are `link`s.
+One of the `Item`s is also a `header`. This is both very legible and Semantic. Even 
+without the existence of the UI Framework, it's mostly obvious what relation the 
+content has to each other. It's very simple to create UI elements, which is a 
+good thing because I am Bad at CSS and also Not a Designer. It's also reasonably
+pretty, and definitely easy to read, fulfilling goal 4.
+
+We use the [Fomantic UI](https://fomantic-ui.com/) stylesheets and 
+[Semantic UI React](https://react.semantic-ui.com/). Fomantic UI is a community fork of
+Semantic UI[^2], and Semantic UI React just adds handy React components that translate 
+into Semantic UI elements.
+
+[^2]: The original maintainer of Semantic UI ended up unable to actively maintain the project [due to work commitments](https://github.com/Semantic-Org/Semantic-UI/issues/6109#issuecomment-361104864) (Honestly the most valid). Fomantic UI is a community fork to continue development, with the intention of being merged back into Semantic UI at a later date. 
+
+# Devops
+
+There's a robust set of devops tools in place to make building and deploying the site
+as easy as possible. The infastructure mostly follows [GitOps](https://www.weave.works/technologies/gitops/) 
+principles, but not perfectly. In essence, all I have to do to update the live site
+is to add a commit to the appropriate branch, reducing friction as much as possible 
+in accordance with goal 1. 
+
+## CircleCI
+I use CircleCI to provide CI and CD. As far as configurations go, it's pretty simple.
+I first build a production build of the site with React Static. I then put the built
+site into a [docker](https://www.docker.com/) image that serves it with [nginx](https://www.nginx.com/).
+I tag the docker image with both the git commit hash and the branch it's on and then push
+that image and both tags to my private docker repository instance at `repository.hyphen-emdash.com`.
+
+## Deploy
+Under the `promote` branch lives a [Docker Compose](https://docs.docker.com/compose/)
+configuration that defines a `master`, `staging`, and `cursed` instance of skyedelaciel,
+corresponding to the branches `master`, `staging` and `cursed`. A local version of this 
+branch is stored on hyphen-emdash.com. On commits to `staging`, `promote`, `cursed`, and 
+`master`, in addition to building and tagging the regular image, I define another task 
+to ssh into `hyphen-emdash.com`[^3] and both update the local repository and pull and run
+the latest versions of the `master`, `staging`, and `cursed` images.
+
+
+[^3]: I realize that I'm giving out a lot of details about my probably very vulnerable personal server, and if I get hacked it will only be my own fault. If you are a console cowboy surfing the reaches of cyberspace and notice anything vulnerable about anything on `hyphen-emdash.com`, please drop me a note at [skye@hyphen-emdash.com](mailto:skye@hyphen-emdash.com) so I can fix it. Or hack my server and use it to impersonate me and mine bitcoin (please don't actually do that).
+
+## Serving
+The docker images serve the site, but do so indiscriminately and without HTTPS, a big 
+no-no. `hyphen-emdash` runs [docker-proxy](https://github.com/jwilder/nginx-proxy) and
+[docker-letsencrypt-nginx-proxy-companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion) to provide routing and HTTPS to all the other
+microservices living on [hyphen-emdash.com](https://hyphen-emdash.com/).
+In the `docker-compose.yml` that is part of `promote`, we set the environment variables 
+that docker-proxy needs to work its magic and then we're done! We serve the production 
+instance at [skyedelaciel.hyphen-emdash.com](https://skyedelaciel.hyphen-emdash.com), 
+and do so similarly with our `cursed` and  `staging` branches. `docker-proxy` routes 
+requests automagically based on the HTTP host header, and 
+`docker-letsencrypt-nginx-proxy-companion` talks to [Let's Encrypt](https://letsencrypt.org/) to automagically generate and serve a certificate for the site.

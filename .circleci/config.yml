@@ -8,6 +8,11 @@ jobs:
       - image: circleci/node
     steps:
       - checkout
+      - run:
+          name: "Pull Submodules"
+          command: |
+            git submodule init
+            git submodule update --remote
       - restore_cache:
           keys:
             # Find a cache corresponding to this specific package-lock.json checksum
@@ -66,4 +71,4 @@ workflows:
                 - master
                 - staging
                 - cursed
-      
+                - promote
