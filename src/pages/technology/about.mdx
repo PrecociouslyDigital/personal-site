@@ -135,7 +135,7 @@ spits out a single html entrypoint that looks something like this:
                         </div>
                     </div>
                 </div>
-				...
+		...
 </body>
 </html>
 ```
@@ -150,10 +150,9 @@ React Static also generates some stuff that looks like this
 
 ```html
 <script type="text/javascript">
-        window.__routeInfo = JSON.parse("{\"template\":\"/home/fellfromatree/workbench/site/src/pages/index.tsx\",\"sharedHashesByProp\":{},\"data\":{},\"path\":\"/\",\"sharedData\":{},\"siteData\":{}}");
+        window.__routeInfo = JSON.parse("...");
 </script>
-<script defer="" type="text/javascript" src="/templates/vendors~home/fellfromatree/workbench/site/src/pages/about.mdx~home/fellfromatree/workbench/site/src/~4933c0e9.c9c92bfa.js"></script>
-<script defer="" type="text/javascript" src="/templates/home/fellfromatree/workbench/site/src/pages/index.tsx.2a5a042a.js"></script>
+...
 <script defer="" type="text/javascript" src="/templates/styles.ac1fd06f.js"></script>
 <script defer="" type="text/javascript" src="/templates/vendors~main.302c4a1d.js"></script>
 <script defer="" type="text/javascript" src="/main.889e95d7.js"></script>
@@ -232,12 +231,7 @@ styled as such, and we can do the same thing on any page that requires a title.
 This configuration is basically "[The Best of Both Worlds](https://www.youtube.com/watch?v=uVjRe8QXFHY)"
 We get the nice syntax of Markdown with all the flexibility of React.[^1]
 
-[^1]: Under the hood, MDX uses [remark](https://remark.js.org/) and 
-[rehype](https://github.com/rehypejs/rehype), both part of the 
-unified.js collective](https://unifiedjs.com/) to transpile markdown to JSX. This
-lets us also take advantage of the broad ecosystem of plugins around these tools
-to provide stuff like [syntax highlighting](https://github.com/mapbox/rehype-prism) or
-[latex blocks](https://github.com/remarkjs/remark-math/tree/master/packages/remark-math).
+[^1]: Under the hood, MDX uses [remark](https://remark.js.org/) and [rehype](https://github.com/rehypejs/rehype), both part of the [unified.js collective](https://unifiedjs.com/) to transpile markdown to JSX. This lets us also take advantage of the broad ecosystem of plugins around these tools to provide stuff like [syntax highlighting](https://github.com/mapbox/rehype-prism) or [latex blocks](https://github.com/remarkjs/remark-math/tree/master/packages/remark-math).
 
 # Semantic UI
 Semantic UI tries to express design
@@ -286,10 +280,7 @@ We use the [Fomantic UI](https://fomantic-ui.com/) stylesheets and
 Semantic UI[^2], and Semantic UI React just adds handy React components that translate 
 into Semantic UI elements.
 
-[^2]: The original maintainer of Semantic UI ended up unable to actively maintain the
-project [due to work commitments](https://github.com/Semantic-Org/Semantic-UI/issues/6109#issuecomment-361104864) (Honestly the most valid). Fomantic UI is a
-community fork to continue development, with the intention of being merged back into 
-Semantic UI at a later date. 
+[^2]: The original maintainer of Semantic UI ended up unable to actively maintain the project [due to work commitments](https://github.com/Semantic-Org/Semantic-UI/issues/6109#issuecomment-361104864) (Honestly the most valid). Fomantic UI is a community fork to continue development, with the intention of being merged back into Semantic UI at a later date. 
 
 # Devops
 
@@ -316,12 +307,7 @@ to ssh into `hyphen-emdash.com`[^3] and both update the local repository and pul
 the latest versions of the `master`, `staging`, and `cursed` images.
 
 
-[^3]: I realize that I'm giving out a lot of details about my probably very vulnerable
-personal server, and if I get hacked it will only be my own fault. If you are a console
-cowboy surfing the reaches of cyberspace and notice anything vulnerable about anything
-on `hyphen-emdash.com`, please drop me a note at [skye@hyphen-emdash.com](mailto:skye@hyphen-emdash.com)
-so I can fix it. Or hack my server and use it to impersonate me and mine bitcoin (please
-don't actually do that).
+[^3]: I realize that I'm giving out a lot of details about my probably very vulnerable personal server, and if I get hacked it will only be my own fault. If you are a console cowboy surfing the reaches of cyberspace and notice anything vulnerable about anything on `hyphen-emdash.com`, please drop me a note at [skye@hyphen-emdash.com](mailto:skye@hyphen-emdash.com) so I can fix it. Or hack my server and use it to impersonate me and mine bitcoin (please don't actually do that).
 
 ## Serving
 The docker images serve the site, but do so indiscriminately and without HTTPS, a big 
@@ -331,6 +317,6 @@ microservices living on [hyphen-emdash.com](https://hyphen-emdash.com/).
 In the `docker-compose.yml` that is part of `promote`, we set the environment variables 
 that docker-proxy needs to work its magic and then we're done! We serve the production 
 instance at [skyedelaciel.hyphen-emdash.com](https://skyedelaciel.hyphen-emdash.com), 
-and do so similarly with our `cursed` and  `staging` branches. Docker-proxy routes 
+and do so similarly with our `cursed` and  `staging` branches. `docker-proxy` routes 
 requests automagically based on the HTTP host header, and 
-docker-letsencrypt-nginx-proxy-companion talks to [Let's Encrypt](https://letsencrypt.org/) to automagically generate and serve a certificate for the site.
+`docker-letsencrypt-nginx-proxy-companion` talks to [Let's Encrypt](https://letsencrypt.org/) to automagically generate and serve a certificate for the site.
