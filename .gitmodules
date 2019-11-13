@@ -1,0 +1,3 @@
+[submodule "src/partials/sandwich-definitions"]
+	path = src/partials/sandwich-definitions
+	url = git@github.com:PrecociouslyDigital/sandwich-definitions.git
