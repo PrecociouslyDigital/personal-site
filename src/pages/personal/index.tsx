@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Grid, Container } from 'semantic-ui-react';
+import { Link } from '@reach/router';
 import { Navbar } from '../../components/navbar';
 
 import Reccomendations from '../../partials/recommendations.mdx';
 import { Title } from '../../components/title/title';
 
-export default React.memo(() => (
+export default () => (
     <Container text>
         <Navbar />
         <Title>
@@ -36,11 +37,16 @@ export default React.memo(() => (
                 <Grid.Column>
                     <h2>Miscallanious</h2>
                     <p>Things that do not fall within the bounds of the other categories </p>
-                    <ul />
+                    <ul> 
+                        <li><a href="https://slatestarcodex.com/2014/11/21/the-categories-were-made-for-man-not-man-for-the-categories/">
+                            The Categories were Made for Man, not Man for the Categories
+                        </a></li>
+                        <li> <Link to="/personal/sandwich">The Definition of a Sandwich</Link> </li>
+                    </ul>
                 </Grid.Column>
             </Grid.Row>
         </Grid>
         <h2>Things I also read</h2>
         <Reccomendations />
     </Container>
-));
+);

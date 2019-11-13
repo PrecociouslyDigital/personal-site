@@ -6,7 +6,7 @@ import { Navbar } from '../../components/navbar';
 import { Title } from '../../components/title/title';
 
 
-export default React.memo(() => (
+export default () => (
     <Container text>
         <Navbar />
         <Title>
@@ -23,9 +23,12 @@ export default React.memo(() => (
                     <ul />
                 </Grid.Column>
                 <Grid.Column>
-                    <h2>Security</h2>
-                    <p>Things about getting places we shouldn't be</p>
-                    <ul />
+                    <h2>Portfolio</h2>
+                    <p>Things that I've worked on</p>
+                    <ul>
+                        <li><a href="https://mozak.science/">Mozak</a> a citizen science game helping neuroscience research</li>
+                        <li><a href="https://github.com/anubiann00b/ElementalBattle">A short and sweet game I worked on with some friends at Codeday 2015</a></li>
+                    </ul>
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -42,9 +45,10 @@ export default React.memo(() => (
                     <p>Things that do not fall within the bounds of the other categories </p>
                     <ul>
                         <li><a href="https://ansuz.sooke.bc.ca/entry/23">What Colour are your bits? (Skala 2004) </a></li>
+                        
                     </ul>
                 </Grid.Column>
             </Grid.Row>
         </Grid>
     </Container>
-));
+);
