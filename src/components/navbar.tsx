@@ -23,6 +23,9 @@ const Navbar : React.FC = React.memo(() => (
         <Menu.Item link right>
             <Popup
                 content="Twitter"
+                size="small"
+                inverted
+                position="bottom center"
                 trigger={(
                     <a href="https://twitter.com/skyedelaciel" aria-label="Twitter">
                         <Icon name="twitter" link />
@@ -33,6 +36,9 @@ const Navbar : React.FC = React.memo(() => (
         <Menu.Item link right>
             <Popup
                 content="Email"
+                size="small"
+                inverted
+                position="bottom center"
                 trigger={(
                     <a href="mailto:skye@hyphen-emdash.com" aria-label="Email">
                         <Icon name="mail" link />
@@ -48,9 +54,17 @@ const Navbar : React.FC = React.memo(() => (
             />
         </Menu.Item>
         <Menu.Item link right>
-            <a href="https://github.com/precociouslydigital/personal-site" aria-label="Github">
-                <Icon name="github" link />
-            </a>
+            <Popup
+                content="Github"
+                size="small"
+                inverted
+                position="bottom center"
+                trigger={(
+                     <a href="https://github.com/precociouslydigital/personal-site" aria-label="Github">
+                        <Icon name="github" link />
+                    </a>
+                )}
+            />
         </Menu.Item>
     </Menu>
 ));
