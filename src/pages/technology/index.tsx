@@ -26,7 +26,7 @@ export default () => (
                     <h2>Portfolio</h2>
                     <p>Things that I've worked on</p>
                     <ul>
-                        <li><a href="https://mozak.science/">Mozak</a> a citizen science game helping neuroscience research</li>
+                        <li><a href="https://www.mozak.science/">Mozak,</a> a citizen science game helping neuroscience research</li>
                         <li><a href="https://github.com/anubiann00b/ElementalBattle">A short and sweet game I worked on with some friends at Codeday 2015</a></li>
                     </ul>
                 </Grid.Column>

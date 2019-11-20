@@ -1,2 +1,2 @@
-FROM nginx:alpine
-COPY ./dist /usr/share/nginx/html
+FROM dragas/thttpd:latest
+COPY ./dist /var/www/http
