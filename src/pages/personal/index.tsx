@@ -35,7 +35,7 @@ export default () => (
                     <ul />
                 </Grid.Column>
                 <Grid.Column>
-                    <h2>Miscallanious</h2>
+                    <h2>Miscellaneous</h2>
                     <p>Things that do not fall within the bounds of the other categories </p>
                     <ul> 
                         <li><a href="https://slatestarcodex.com/2014/11/21/the-categories-were-made-for-man-not-man-for-the-categories/">
