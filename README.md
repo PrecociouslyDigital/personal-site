@@ -2,7 +2,7 @@
 
 My personal site.
 
-[Find it here](https://skyedelaciel.hyphen-emdash.com)
+[Find it here](https://skyedelaciel.com)
 
 [Read more about the site](src/pages/about.mdx)
 
